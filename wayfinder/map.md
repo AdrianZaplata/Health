@@ -17,6 +17,8 @@ A vetted, week-1-executable plan for Adrian covering five parts: (1) a professio
 
 <!-- one line per closed ticket: gist + link -->
 
+- [Research: eating for muscle gain — evidence-based targets](tickets/004-research-muscle-gain-nutrition.md) — ~1.6–2.2 g/kg protein, small (+10–20%) surplus calibrated by weight trend, whole-food pattern + creatine as the only strong supplement; sleep restriction demonstrably blunts muscle growth and lowers pain thresholds, so ≥7 h/night is the top recovery lever.
+
 ## Not yet specified
 
 - **Progression and periodization beyond the first training block** — what week 9+ looks like depends on how the first block and the rehab protocol go; can't be phrased sharply until [Draft the gym program](tickets/007-draft-gym-program.md) resolves.
