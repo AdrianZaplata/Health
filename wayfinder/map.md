@@ -17,6 +17,8 @@ A vetted, week-1-executable plan for Adrian covering five parts: (1) a professio
 
 <!-- one line per closed ticket: gist + link -->
 
+- [Research: posture asymmetry and chronic low back pain — what the evidence says](tickets/002-research-posture-evidence.md) — the leg-crossing → pelvic-tilt/torsion → pain chain is unsupported by evidence, and "lower crossed syndrome"/"gluteal amnesia" are unvalidated constructs; guidelines uniformly say stay active and make exercise (resistance training included) first-line for chronic non-specific LBP. Plans should build on "get strong and stay active", not "correct the tilt".
+- [Research: beginner strength training with a low-back-pain history](tickets/003-research-training-with-lbp.md) — progressive resistance training is safe and first-line-compatible for recurrent LBP; start full-body 2–3×/week with trap-bar/goblet progressions before floor deadlifts and heavy back squats, gate loading on extensor endurance (Biering–Sørensen > 60 s), and program glute/hip work as normal progressive loading.
 - [Research: eating for muscle gain — evidence-based targets](tickets/004-research-muscle-gain-nutrition.md) — ~1.6–2.2 g/kg protein, small (+10–20%) surplus calibrated by weight trend, whole-food pattern + creatine as the only strong supplement; sleep restriction demonstrably blunts muscle growth and lowers pain thresholds, so ≥7 h/night is the top recovery lever.
 
 ## Not yet specified
