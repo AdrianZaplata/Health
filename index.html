@@ -141,13 +141,16 @@ function lastFor(history, key) {
   return null;
 }
 
-// Double progression: top of the rep range on all sets -> add inc kg, restart
-// at the bottom of the range; otherwise repeat the weight and chase the top.
+// Double progression: top of the rep range on all prescribed sets -> add inc
+// kg, restart at the bottom of the range; otherwise repeat the weight and
+// chase the top. An incomplete session (fewer sets logged than prescribed)
+// never triggers an increase.
 function suggestTarget(ex, last) {
   if (ex.bodyweight || !last || !last.sets) return null;
   var sets = last.sets.filter(function (s) { return s.reps != null && s.reps !== ''; });
   if (!sets.length) return null;
-  var allTop = sets.every(function (s) { return +s.reps >= ex.range[1]; });
+  var allTop = sets.length >= ex.sets &&
+    sets.every(function (s) { return +s.reps >= ex.range[1]; });
   var kg = Math.max.apply(null, sets.map(function (s) { return +s.kg || 0; }));
   if (allTop) return { kg: Math.round((kg + ex.inc) * 10) / 10, reps: ex.range[0], up: true };
   return { kg: kg, reps: ex.range[1], up: false };
@@ -175,13 +178,16 @@ function suggestTarget(ex, last) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   }
+  function byId(list, id) {
+    return list.filter(function (x) { return x.id === id; })[0] || null;
+  }
   function session(id) {
-    return PROGRAM.sessions.filter(function (s) { return s.id === id; })[0];
+    return byId(PROGRAM.sessions, id);
   }
   function findEx(key) {
     var id = key.split(':')[0];
     for (var i = 0; i < PROGRAM.sessions.length; i++) {
-      var hit = PROGRAM.sessions[i].exercises.filter(function (e) { return e.id === id; })[0];
+      var hit = byId(PROGRAM.sessions[i].exercises, id);
       if (hit) return hit;
     }
     return null;
@@ -190,11 +196,8 @@ function suggestTarget(ex, last) {
     var ex = findEx(key);
     if (!ex) return key;
     var vid = key.split(':')[1];
-    if (vid && ex.variants) {
-      var v = ex.variants.filter(function (x) { return x.id === vid; })[0];
-      if (v) return v.name;
-    }
-    return ex.name;
+    var v = vid && ex.variants ? byId(ex.variants, vid) : null;
+    return v ? v.name : ex.name;
   }
   function fmtDate(iso) {
     var d = new Date(iso);
@@ -211,8 +214,7 @@ function suggestTarget(ex, last) {
   }
   function videoOf(ex) {
     if (!ex.variants) return ex.video;
-    var vid = variantOf(ex);
-    return ex.variants.filter(function (v) { return v.id === vid; })[0].video;
+    return byId(ex.variants, variantOf(ex)).video;
   }
   function activeSets(key) {
     if (!state.active.ex[key]) state.active.ex[key] = { sets: [] };

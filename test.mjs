@@ -106,6 +106,11 @@ test('all sets at top of range -> +5 kg lower', () => {
   assert.deepEqual(plain(t), { kg: 45, reps: squat.range[0], up: true });
 });
 
+test('fewer sets than prescribed -> no increase even if all logged sets hit top', () => {
+  const t = suggestTarget(bench, { sets: [{ kg: 60, reps: 10 }] });
+  assert.deepEqual(plain(t), { kg: 60, reps: bench.range[1], up: false });
+});
+
 test('not all sets at top -> repeat the weight, chase top of range', () => {
   const t = suggestTarget(bench, { sets: [{ kg: 60, reps: 10 }, { kg: 60, reps: 9 }, { kg: 60, reps: 8 }] });
   assert.deepEqual(plain(t), { kg: 60, reps: bench.range[1], up: false });
